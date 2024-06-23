@@ -1,7 +1,6 @@
 Single-database configuration for Flask.
 
-use python app.py or flask run (to run the app.)
+use python app.py or flask run in VS Code terminal to run the app.
 
-http://127.0.0.1:5000/: You should see a message like "Hello, World! This is your Task Management Application." This confirms that your Flask application is running and the landing page is accessible.
 http://127.0.0.1:5000/tasks: You should see a JSON response with an array of tasks, like {"tasks": [...]}. This confirms that your /tasks endpoint is correctly implemented and returning data.
 http://127.0.0.1:5000/tasks-page: You should see a statement like "Task Management Application". This confirms that your /tasks-page endpoint is accessible. Here you can create, delete, edit and see your tasks. 
