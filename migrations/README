@@ -2,7 +2,7 @@
 •	Repository link: https://github.com/ananyadav/task_management_app.git
 •	Use python app.py or flask run in VS Code terminal to run the app.
 •	Check http://127.0.0.1:5000/tasks: to see if the app is up and running. You should see a JSON response with an array of tasks, like {"tasks": [...]}. This confirms that your /tasks endpoint is correctly implemented and returning data.
-•	Open http://127.0.0.1:5000/tasks-page:  to see a statement like "Task Management Application". This confirms that your /tasks-page endpoint is accessible. Here you can create, delete, edit and see your tasks.
+•	Open http://127.0.0.1:5000 to see a statement like "Task Management Application". This confirms that your /tasks-page endpoint is accessible. Here you can create, delete, edit and see your tasks.
 Project Overview
 The Task Management Application is a web-based tool designed to help users manage their tasks effectively. It allows users to add, edit, delete tasks, mark tasks as completed, and view a list of their tasks. The application uses HTML, CSS for styling, Bootstrap for UI components, and JavaScript (with Fetch API) for dynamic interaction with a server-side API.
 Files and Directory Structure
