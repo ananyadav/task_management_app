@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,35 +10,41 @@
     <!-- Custom CSS -->
     <style>
         body {
-            background-color: #818CF8; /* $indigo-400 */
+            background-color: #1e3a8a; /* $blue-900 */
             color: #E0E7FF; /* $indigo-100 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+        .container {
+            background-color: #60a5fa; /* $blue-400 */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         .task-list {
-            height: calc(100vh - 100px);
-            overflow-y: auto;
-            border-right: 1px solid #ccc;
-            background-color: #C7D2FE; /* $indigo-200 */
             position: fixed;
-            left: -300px; /* Hidden by default */
             top: 0;
+            left: 0;
             bottom: 0;
             width: 300px;
-            transition: left 0.3s ease-in-out;
+            overflow-y: auto;
+            background-color: #60a5fa; /* $blue-400 */
+            border-right: 1px solid #ccc;
+            padding: 20px;
+            display: none;
         }
         .task-list.visible {
-            left: 0; /* Show sidebar */
-        }
-        .main-content {
-            margin-left: 0; /* Adjust based on sidebar visibility */
-            transition: margin-left 0.3s ease-in-out;
-        }
-        .main-content.shifted {
-            margin-left: 300px; /* Adjust based on sidebar visibility */
+            display: block;
         }
         .add-task-form {
             padding: 20px;
-            background-color: #f0f0f0;
+            background-color: #ffffff;
             margin-bottom: 20px;
+            border-radius: 8px;
         }
         .task-card {
             margin-bottom: 10px;
@@ -45,83 +52,87 @@
             border: 1px solid #ddd;
             border-radius: 5px;
             padding: 10px;
+            color: #000000;
         }
         .btn-my-tasks {
-            background-color: #7C3AED; /* $purple-600 */
-            border-color: #7C3AED;
+            background-color: #6610f2; /* $indigo */
+            border-color: #6610f2;
             color: #ffffff;
+            float: right;
         }
         .btn-my-tasks:hover {
-            background-color: #6B2CAB; /* Darken slightly on hover */
-            border-color: #6B2CAB;
+            background-color: #520db7;
+            border-color: #520db7;
         }
         .btn-primary {
-            background-color: #7C3AED; /* Match with My Tasks button */
-            border-color: #7C3AED;
+            background-color: #6610f2; /* $indigo */
+            border-color: #6610f2;
+            float: left;
         }
         .btn-primary:hover {
-            background-color: #6B2CAB; /* Darken slightly on hover */
-            border-color: #6B2CAB;
+            background-color: #520db7;
+            border-color: #520db7;
         }
         .btn-edit {
-            background-color: #7C3AED; /* Match with My Tasks button */
-            border-color: #7C3AED;
+            background-color: #6610f2; /* $indigo */
+            border-color: #6610f2;
         }
         .btn-edit:hover {
-            background-color: #6B2CAB; /* Darken slightly on hover */
-            border-color: #6B2CAB;
+            background-color: #520db7;
+            border-color: #520db7;
         }
         .btn-delete {
-            background-color: #560BAD; /* $indigo-700 */
-            border-color: #560BAD;
+            background-color: #520db7;
+            border-color: #520db7;
         }
         .btn-delete:hover {
-            background-color: #480A9C; /* Darken slightly on hover */
-            border-color: #480A9C;
+            background-color: #3d0a91;
+            border-color: #3d0a91;
         }
         .task-details h5,
         .task-details p,
         .task-details .form-check-label {
             font-weight: bold;
-            color: #000000; /* Black */
+            color: #000000;
+        }
+        .form-group label {
+            color: #000000;
+            font-weight: bold;
+        }
+        .form-check {
+            display: none; /* Hide the completed checkbox by default */
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="row">
-            <!-- Main Content: Task Details and Add Task Form -->
-            <div class="col-md-8 offset-md-4 main-content" id="main-content">
-                <!-- Task Management Application Title -->
-                <h1 class="mb-4 text-center">Task Management Application</h1>
-                <!-- Form to add new task -->
-                <div class="add-task-form">
-                    <form id="addTaskForm">
-                        <div class="form-group">
-                            <label for="title">Title</label>
-                            <input type="text" class="form-control" id="title" placeholder="Enter task title">
-                        </div>
-                        <div class="form-group">
-                            <label for="description">Description</label>
-                            <textarea class="form-control" id="description" rows="3" placeholder="Enter task description"></textarea>
-                        </div>
-                        <div class="form-group form-check">
-                            <input type="checkbox" class="form-check-input" id="completed">
-                            <label class="form-check-label" for="completed">Completed</label>
-                        </div>
-                        <button type="button" class="btn btn-my-tasks mr-2" onclick="toggleSidebar()">My Tasks</button>
-                        <button type="button" class="btn btn-primary" onclick="addTask()">Add Task</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Sidebar with Task List -->
     <div class="task-list" id="sidebar">
         <h4 class="mb-3 text-center">Task List</h4>
         <div id="tasksList">
             <!-- Tasks will be dynamically inserted here -->
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Task Management Application Title -->
+        <h1 class="mb-4 text-center">Task Management Application</h1>
+        <!-- Form to add new task -->
+        <div class="add-task-form">
+            <form id="addTaskForm">
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" class="form-control" id="title" placeholder="Enter task title">
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea class="form-control" id="description" rows="3" placeholder="Enter task description"></textarea>
+                </div>
+                <div class="form-group form-check">
+                    <input type="checkbox" class="form-check-input" id="completed">
+                    <label class="form-check-label" for="completed">Completed</label>
+                </div>
+                <button type="button" class="btn btn-primary" onclick="addTask()">Add Task</button>
+                <button type="button" class="btn btn-my-tasks" onclick="toggleSidebar()">My Tasks</button>
+            </form>
         </div>
     </div>
 
@@ -166,9 +177,7 @@
     <script>
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
-            const mainContent = document.getElementById('main-content');
             sidebar.classList.toggle('visible');
-            mainContent.classList.toggle('shifted');
         }
 
         function fetchTasks() {
@@ -185,9 +194,8 @@
                                     <h5 class="card-title">${task.title}</h5>
                                     <p class="card-text">${task.description}</p>
                                     <p class="card-text">${task.completed ? 'Completed' : 'Pending'}</p>
-                                    <button class="btn btn-edit mr-2"
-                                        onclick="editTask(${task.id})" data-toggle="modal" data-target="#editTaskModal">Edit</button>
-                                                                        <button class="btn btn-delete" onclick="deleteTask(${task.id})">Delete</button>
+                                    <button class="btn btn-edit mr-2"                                     onclick="editTask(${task.id})" data-toggle="modal" data-target="#editTaskModal">Edit</button>
+                                    <button class="btn btn-delete" onclick="deleteTask(${task.id})">Delete</button>
                                 </div>
                             </div>
                         `;
@@ -230,6 +238,9 @@
                     document.getElementById('editTitle').value = data.title;
                     document.getElementById('editDescription').value = data.description;
                     document.getElementById('editCompleted').checked = data.completed;
+
+                    // Show the edit form modal
+                    $('#editTaskModal').modal('show');
                 })
                 .catch(error => console.error('Error fetching task details:', error));
         }
@@ -280,4 +291,3 @@
     </script>
 </body>
 </html>
-
